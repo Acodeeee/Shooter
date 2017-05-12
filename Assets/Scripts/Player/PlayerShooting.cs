@@ -24,6 +24,8 @@ public class PlayerShooting : MonoBehaviour {
 		gunLine = GetComponent<LineRenderer>();
 		gunLight = GetComponent<Light>();
 		gunAudio = GetComponent<AudioSource>();
+
+		shootRay = new Ray();
 	}
 	void Update(){
 		timer += Time.deltaTime;

@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour {
 	public int startingHealth = 100;
 	public int currentHealth;
 	public float sinkSpeed = 2.5f;
+	public int scoreValue = 10;
 	public AudioClip deathClip;
 
 	Animator anim;
@@ -70,19 +71,20 @@ public class EnemyHealth : MonoBehaviour {
 		enemyAudio.Play();
 	}
 
+	//此函数在Enemy Death动画里被自动调用
 	public void StartSinking ()
     {
         // Find and disable the Nav Mesh Agent.
         GetComponent <NavMeshAgent> ().enabled = false;
 
-        // Find the rigidbody component and make it kinematic (since we use Translate to sink the enemy).
+        // 如果isKinematic启用，力、碰撞或关节将不会影响这个刚体。刚体将通过改变transform.postion根据动画或脚本完全控制。
         GetComponent <Rigidbody> ().isKinematic = true;
 
         // The enemy should no sink.
         isSinking = true;
 
         // Increase the score by the enemy's score value.
-        // ScoreManager.score += scoreValue;
+         ScoreManager.score += scoreValue;
 
         // After 2 seconds destory the enemy.
         Destroy (gameObject, 2f);
